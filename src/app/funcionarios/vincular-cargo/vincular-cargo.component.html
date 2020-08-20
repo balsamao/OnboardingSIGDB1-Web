@@ -1,0 +1,56 @@
+<app-alerta-sucesso [podeExibir]="sucesso"></app-alerta-sucesso>
+
+<section class="content-header">
+    <div class="row">
+        <div class="col">
+            <h3>{{titulo}}</h3>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+
+    <form [formGroup]="funcionarioForm">
+
+        <div class="row">
+            <!-- NOME -->
+            <div class="col">
+                <label for="nome-funcionario">Nome</label>
+                <input class="form-control form-control-sm" type="text" id="nomeFuncionario" formControlName="name" readonly>
+            </div>
+            <!-- NOME -->
+        </div>
+
+        <div class="row">
+
+            <!-- CARGOS -->
+            <div class="col margem">
+                <label for="cargo-funcionario">Cargos</label>
+                <select class="form-control form-control-sm" (change)="onSelect($event.target.value)" id="cargo-funcionario" formControlName="roleId">
+                    <option></option>
+                    <option *ngFor="let cargo of cargos" value={{cargo.id}}>
+                        {{cargo.description}}
+                </select>
+            </div>
+            <!-- EMPRESAS -->
+
+        </div>
+
+        <div class="row">
+            <!-- SALVAR -->
+            <div class="col-auto margem">
+                <input class="btn btn-primary float-right" type="button" value="Salvar"
+                    [disabled]="!funcionarioForm.valid" (click)="salvarFuncionario()">
+            </div>
+            <!-- SALVAR -->
+
+            <!-- VOLTAR -->
+            <div class="col-auto margem">
+                <a class="btn btn-secondary " [routerLink]="['/funcionarios']" role="button">Voltar</a>
+            </div>
+            <!-- VOLTAR -->
+        </div>
+
+    </form>
+
+</section>

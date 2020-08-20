@@ -1,0 +1,32 @@
+<div class="row tabela">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Data Fundação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let empresa of empresas">
+                <th scope="row">{{empresa?.id}}</th>
+                <td>{{empresa?.name}}</td>
+                <td>{{empresa?.cnpj | mask: '00.000.000/0000-00'}}</td>
+                <td>{{empresa?.fundation}}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mais opções
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/cadastro-empresa', empresa.id]">Editar</a>
+                            <a class="dropdown-item" [routerLink]="['/empresas']" (click)="excluirEmpresa(empresa.id)">Excluir</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

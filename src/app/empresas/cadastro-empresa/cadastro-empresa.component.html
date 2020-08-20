@@ -1,0 +1,76 @@
+<app-alerta-sucesso [podeExibir]="sucesso"></app-alerta-sucesso>
+<app-alerta-erro [podeExibir]="mensagemErro.length > 0" [mensagem]="mensagemErro"></app-alerta-erro>
+
+<section class="content-header">
+    <div class="row">
+        <div class="col">
+            <h3>{{titulo}}</h3>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+
+    <form [formGroup]="empresaForm" >
+
+        <div class="row">
+            <!-- NOME -->
+            <div class="col">
+                <label for="nome-empresa">Nome</label>
+                <input type="text" class="form-control form-control-sm" [class.is-invalid]="name.invalid" [class.is-valid]="name.valid" id="nomeEmpresa" formControlName="name"
+                    maxlength="150" required>
+                <div *ngIf="name.invalid" class="invalid-feedback">
+                    <div *ngIf="name.errors.required">
+                        Nome é obrigatório.
+                    </div>
+                </div>
+            </div>
+            <!-- NOME -->
+        </div>
+
+        <div class="row">
+
+            <!-- CNPJ -->
+            <div class="col-6">
+                <label for="cnpj-empresa">CNPJ</label>
+                <input type="text" class="form-control form-control-sm" [class.is-invalid]="cnpj.invalid" [class.is-valid]="cnpj.valid" formControlName="cnpj" name="cnpjEmpresa"
+                     mask="00.000.000/0000-00" pattern="{{regexCnpj}}" required 
+                    cnpjValidadorDirective>
+                <div *ngIf="cnpj.invalid" class="invalid-feedback">
+                    <div *ngIf="cnpj.errors.required">
+                        CNPJ é obrigatório.
+                    </div>
+                    <div *ngIf="cnpj.errors.pattern || cnpj.errors.cnpjValidador">
+                        CNPJ inválido
+                    </div>
+                </div>
+            </div>
+            <!-- CNPJ -->
+
+            <!-- DATA FUNDAÇÃO -->
+            <div class="col-6">
+                <label for="fundacao-empresa">Data Fundação</label>
+                <input class="form-control form-control-sm" type="date" [class.is-invalid]="fundation.errors" [class.is-valid]="!fundation.errors" id="fundacaoEmpresa" formControlName="fundation">
+            </div>
+            <!-- DATA FUNDAÇÃO -->
+
+        </div>
+
+        <div class="row">
+            <!-- SALVAR -->
+            <div class="col-auto botoes">
+                <input class="btn btn-primary float-right" type="button" value="Salvar" [disabled]="!empresaForm.valid"
+                    (click)="salvarEmpresa()">
+            </div>
+            <!-- SALVAR -->
+
+            <!-- VOLTAR -->
+            <div class="col-auto botoes">
+                <a class="btn btn-secondary " [routerLink]="['/empresas']" role="button">Voltar</a>
+            </div>
+            <!-- VOLTAR -->
+        </div>
+
+    </form>
+
+</section>

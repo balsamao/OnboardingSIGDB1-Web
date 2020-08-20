@@ -1,0 +1,28 @@
+<div class="row tabela">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cargo of cargos">
+                <th scope="row">{{cargo?.id}}</th>
+                <td>{{cargo?.description}}</td>
+                <td>
+                    <div class="dropdown" style="float: right;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mais opções
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/cadastro-cargo', cargo.id]">Editar</a>
+                            <a class="dropdown-item" [routerLink]="['/cargos']" (click)="excluirCargo(cargo.id)">Excluir</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

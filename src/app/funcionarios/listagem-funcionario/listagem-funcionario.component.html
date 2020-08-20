@@ -1,0 +1,34 @@
+<div class="row tabela">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Data Contratação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let funcionario of funcionarios">
+                <th scope="row">{{funcionario?.id}}</th>
+                <td>{{funcionario?.name}}</td>
+                <td>{{funcionario?.cpf | mask: '000.000.000-00'}}</td>
+                <td>{{funcionario?.hiring}}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mais opções
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/cadastro-funcionario', funcionario.id]">Editar</a>
+                            <a class="dropdown-item" [routerLink]="['/funcionarios']" (click)="excluirFuncionario(funcionario.id)">Excluir</a>
+                            <a class="dropdown-item" [routerLink]="['/vincular-empresa', funcionario.id]">Vincular Empresa</a>
+                            <a class="dropdown-item" [routerLink]="['/vincular-cargo', funcionario.id]" *ngIf="funcionario.companyId">Vincular Cargo</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

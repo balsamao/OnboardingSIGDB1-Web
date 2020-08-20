@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+.alerta{
+    margin-top: 15px;
+}
+
+.btn-novo {
+    align-self: center;
+}
+
+.btn-filtrar{
+    margin-top: auto;
+}
+
+.botoes {
+  margin-top: 10px;
+}
+
+.alerta{
+margin-top: 15px;
+}
+
+.msg-validacao{
+color:red;
+}
+
+.tabela{
+  margin-top: 20px;
+}
+
+.fix-rounded-right {
+  border-top-right-radius: .2rem !important;
+  border-bottom-right-radius: .2rem !important;
+}

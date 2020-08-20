@@ -1,0 +1,74 @@
+<app-alerta-sucesso [podeExibir]="sucesso"></app-alerta-sucesso>
+
+<section class="content-header">
+    <div class="row">
+        <div class="col">
+            <h3>{{titulo}}</h3>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+
+    <form [formGroup]="funcionarioForm">
+
+        <div class="row">
+            <!-- NOME -->
+            <div class="col">
+                <label for="nome-funcionario">Nome</label>
+                <input class="form-control form-control-sm" [class.is-invalid]="name.errors" [class.is-valid]="!name.errors" type="text" id="nomeFuncionario" formControlName="name"
+                    maxlength="150" required>
+                <div *ngIf="name.invalid" class="invalid-feedback">
+                    <div *ngIf="name.errors.required">
+                        Nome é obrigatório.
+                    </div>
+                </div>
+            </div>
+            <!-- NOME -->
+        </div>
+
+        <div class="row">
+
+            <!-- CPF -->
+            <div class="col-6">
+                <label for="cpf-funcionario">CPF</label>
+                <input class="form-control form-control-sm" [class.is-invalid]="cpf.invalid" [class.is-valid]="cpf.valid" type="text" id="cpfFuncionario" formControlName="cpf"
+                    mask="000.000.000-00" pattern="{{regexCPF}}" required cpfValidadorDirective>
+                <div *ngIf="cpf.invalid" class="invalid-feedback">
+                    <div *ngIf="cpf.errors.required">
+                        CPF é obrigatório.
+                    </div>
+                    <div *ngIf="cpf.errors.pattern || cpf.errors.cpfValidador">
+                        CPF inválido.
+                    </div>
+                </div>
+            </div>
+            <!-- CPF -->
+
+            <!-- DATA CONTRATAÇÃO -->
+            <div class="col-6">
+                <label for="contratacao-funcionario">Data Contratação</label>
+                <input class="form-control form-control-sm" [class.is-invalid]="hiring.invalid" [class.is-valid]="hiring.valid" type="date" id="hiringFuncionario" formControlName="hiring">
+            </div>
+            <!-- DATA CONTRATAÇÃO -->
+
+        </div>
+
+        <div class="row">
+            <!-- SALVAR -->
+            <div class="col-auto botoes">
+                <input class="btn btn-primary float-right" type="button" value="Salvar"
+                    [disabled]="!funcionarioForm.valid" (click)="salvarFuncionario()">
+            </div>
+            <!-- SALVAR -->
+
+            <!-- VOLTAR -->
+            <div class="col-auto botoes">
+                <a class="btn btn-secondary " [routerLink]="['/funcionarios']" role="button">Voltar</a>
+            </div>
+            <!-- VOLTAR -->
+        </div>
+
+    </form>
+
+</section>

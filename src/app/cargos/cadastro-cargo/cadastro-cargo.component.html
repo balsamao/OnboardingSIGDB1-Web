@@ -1,0 +1,47 @@
+<app-alerta-sucesso [podeExibir]="sucesso"></app-alerta-sucesso>
+<app-alerta-erro [podeExibir]="mensagemErro.length > 0" [mensagem]="mensagemErro"></app-alerta-erro>
+
+<section class="content-header">
+    <div class="row">
+        <div class="col">
+            <h3>{{titulo}}</h3>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+
+    <form [formGroup]="cargoForm">
+
+        <div class="row">
+            <!-- DESCRIÇÃO -->
+            <div class="col">
+                <label for="descricao-cargo">Nome</label>
+                <input class="form-control form-control-sm" [class.is-invalid]="description.invalid" [class.is-valid]="description.valid" type="text" id="descricao-cargo"
+                    formControlName="description" maxlength="150" required>
+                <div *ngIf="description.invalid" class="invalid-feedback">
+                    <div *ngIf="description.errors.required">
+                        Descrição é obrigatória.
+                    </div>
+                </div>
+            </div>
+            <!-- DESCRIÇÃO -->
+        </div>
+
+        <div class="row">
+            <!-- SALVAR -->
+            <div class="col-auto botoes">
+                <input class="btn btn-primary float-right" type="button" value="Salvar" [disabled]="!cargoForm.valid" (click)="salvarCargo()">
+            </div>
+            <!-- SALVAR -->
+
+            <!-- VOLTAR -->
+            <div class="col-auto botoes">
+                <a class="btn btn-secondary " [routerLink]="['/cargos']" role="button">Voltar</a>
+            </div>
+            <!-- VOLTAR -->
+        </div>
+
+    </form>
+
+</section>
