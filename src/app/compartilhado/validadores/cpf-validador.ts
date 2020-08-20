@@ -4,16 +4,10 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 export function cpfValidador(control: AbstractControl): { [key: string]: any } | null {
     let numero: string = '';
     if (control.value !== undefined && control.value !== null) {
-        for (let posicao = 0; posicao < control.value.length; posicao++) {
-            if (posicao == 0) {
-                numero = control.value[posicao];
-            }
-            if (control.value == numero.repeat(control.value.length)) {
-                console.log(numero.repeat(control.value.length));
-                return { 'cpfValidador': true };
-            }
+        numero = control.value[0];
+        if (control.value == numero?.repeat(control.value.length)) {
+            return { 'cpfValidador': true };
         }
-
     }
     return null;
 }

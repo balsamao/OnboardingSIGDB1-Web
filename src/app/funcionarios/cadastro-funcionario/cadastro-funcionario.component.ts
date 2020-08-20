@@ -16,7 +16,7 @@ import { cpfValidador } from '../../compartilhado/validadores/cpf-validador';
 })
 export class CadastroFuncionarioComponent implements OnInit {
 
-  regexCPF : string = '^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$';
+  regexCPF: string = '^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$';
   private funcionario: Funcionario;
 
   titulo: string = 'Cadastro de funcionários';
@@ -28,14 +28,14 @@ export class CadastroFuncionarioComponent implements OnInit {
     private funcionarioService: FuncionarioService,
     private dataService: DataService,
     private route: ActivatedRoute) {
-      
+
     this.funcionarioForm = this.fb.group({
       id: [this.funcionario?.id],
       name: [this.funcionario?.name, [Validators.required, Validators.maxLength(150)]],
       cpf: [this.funcionario?.cpf, [Validators.required, Validators.pattern(this.regexCPF), cpfValidador]],
       hiring: [this.funcionario?.hiring],
-      companyId: [{Value: this.funcionario?.companyId}],
-      roleId: [{Value: this.funcionario?.roleId}], 
+      companyId: [{ Value: this.funcionario?.companyId }],
+      roleId: [{ Value: this.funcionario?.roleId }],
     });
   }
 
@@ -52,25 +52,15 @@ export class CadastroFuncionarioComponent implements OnInit {
   }
 
   public salvarFuncionario() {
-    
+
     if (this.entidade().id > 0) {
       this.funcionarioService.atualizar(this.entidade())
-        .subscribe(_ => {
-          this.sucesso = true;
-          this.funcionarioForm.reset()
-        }, error => this.mensagemErro = error);
+        .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
     }
     else {
       this.funcionarioService.salvar(this.entidade())
-        .subscribe(_ => {
-          this.sucesso = true;
-          this.funcionarioForm.reset()
-        }, error => this.mensagemErro = error);
+        .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
     }
-  }
-
-  public teste(erro: any){
-    console.log(erro);
   }
 
   get name() { return this.funcionarioForm.get('name'); }
@@ -80,5 +70,16 @@ export class CadastroFuncionarioComponent implements OnInit {
   get hiring() { return this.funcionarioForm.get('hiring'); }
 
   private entidade() { return this.funcionarioForm.getRawValue() as Funcionario; }
+
+  private respostaSucesso() {
+    this.sucesso = true;
+    this.mensagemErro = "";
+    this.funcionarioForm.reset()
+  }
+
+  private respostaComErro(error: any) {
+    this.mensagemErro = error;
+    this.sucesso = false;
+  }
 
 }

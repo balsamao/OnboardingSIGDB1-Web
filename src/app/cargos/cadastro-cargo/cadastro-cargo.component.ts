@@ -44,22 +44,27 @@ export class CadastroCargoComponent implements OnInit {
     
     if (this.entidade().id > 0) {
       this.cargoService.atualizar(this.entidade())
-        .subscribe(_ => {
-          this.sucesso = true;
-          this.cargoForm.reset()
-        }, error => this.mensagemErro = error);
+      .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
     }
     else {
       this.cargoService.salvar(this.entidade())
-        .subscribe(_ => {
-          this.sucesso = true;
-          this.cargoForm.reset()
-        }, error => this.mensagemErro = error);
+      .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
     }
   }
 
   get description() { return this.cargoForm.get('description'); }
 
   private entidade() { return this.cargoForm.getRawValue() as Cargo; }
+
+  private respostaSucesso() {
+    this.sucesso = true;
+    this.mensagemErro = "";
+    this.cargoForm.reset()
+  }
+
+  private respostaComErro(error: any) {
+    this.mensagemErro = error;
+    this.sucesso = false;
+  }
 
 }

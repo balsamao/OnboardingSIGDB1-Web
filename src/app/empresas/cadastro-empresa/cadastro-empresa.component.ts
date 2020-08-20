@@ -53,17 +53,11 @@ export class CadastroEmpresaComponent implements OnInit {
 
     if (this.entidade().id > 0) {
       this.empresaService.atualizar(this.entidade())
-        .subscribe(_ => {
-          this.sucesso = true;
-          this.empresaForm.reset()
-        }, error => this.mensagemErro = error);
+      .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
     }
     else {
       this.empresaService.salvar(this.entidade())
-        .subscribe(_ => {
-          this.sucesso = true;
-          this.empresaForm.reset()
-        }, error => this.mensagemErro = error);
+      .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
     }
   }
 
@@ -74,5 +68,16 @@ export class CadastroEmpresaComponent implements OnInit {
   get fundation() { return this.empresaForm.get('fundation'); }
 
   private entidade() { return this.empresaForm.getRawValue() as Empresa; }
+
+  private respostaSucesso() {
+    this.sucesso = true;
+    this.mensagemErro = "";
+    this.empresaForm.reset()
+  }
+
+  private respostaComErro(error: any) {
+    this.mensagemErro = error;
+    this.sucesso = false;
+  }
 
 }

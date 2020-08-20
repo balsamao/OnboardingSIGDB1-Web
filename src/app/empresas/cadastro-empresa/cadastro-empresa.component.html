@@ -1,5 +1,5 @@
 <app-alerta-sucesso [podeExibir]="sucesso"></app-alerta-sucesso>
-<app-alerta-erro [podeExibir]="mensagemErro.length > 0" [mensagem]="mensagemErro"></app-alerta-erro>
+<app-alerta-erro [podeExibir]="mensagemErro?.length > 0" [mensagem]="mensagemErro"></app-alerta-erro>
 
 <section class="content-header">
     <div class="row">
@@ -57,9 +57,9 @@
         </div>
 
         <div class="row">
-            <!-- SALVAR -->
+            <!-- SALVAR [disabled]="!empresaForm.valid"-->
             <div class="col-auto botoes">
-                <input class="btn btn-primary float-right" type="button" value="Salvar" [disabled]="!empresaForm.valid"
+                <input class="btn btn-primary float-right" type="button" value="Salvar" 
                     (click)="salvarEmpresa()">
             </div>
             <!-- SALVAR -->
