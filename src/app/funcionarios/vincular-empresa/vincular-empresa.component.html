@@ -1,4 +1,5 @@
 <app-alerta-sucesso [podeExibir]="sucesso"></app-alerta-sucesso>
+<app-alerta-erro [podeExibir]="mensagemErro.length > 0" [mensagem]="mensagemErro"></app-alerta-erro>
 
 <section class="content-header">
     <div class="row">
@@ -24,7 +25,7 @@
         <div class="row">
 
             <!-- EMPRESAS -->
-            <div class="col margem">
+            <div class="col-6 margem">
                 <label for="cpf-funcionario">Empresas</label>
                 <select class="form-control form-control-sm" (change)="onSelect($event.target.value)" id="empresa-funcionario" formControlName="companyId">
                     <option></option>
@@ -34,13 +35,24 @@
             </div>
             <!-- EMPRESAS -->
 
+            <!-- DATA CONTRATAÇÃO -->
+            <div class="col-6 margem">
+                <label for="contratacao-funcionario">Data Contratação</label>
+                <input class="form-control form-control-sm" [class.is-invalid]="funcionarioForm.errors?.contratacaoValidador" [class.is-valid]="hiring.valid" type="date" id="hiringFuncionario" formControlName="hiring">
+                <div *ngIf="funcionarioForm.errors?.contratacaoValidador" class="invalid-feedback">
+                    <div *ngIf="funcionarioForm.errors?.contratacaoValidador">
+                        Data de contratação é obrigatória.
+                    </div>
+                </div>
+            </div>
+            <!-- DATA CONTRATAÇÃO -->
+
         </div>
 
         <div class="row">
             <!-- SALVAR -->
             <div class="col-auto margem">
-                <input class="btn btn-primary float-right" type="button" value="Salvar"
-                    [disabled]="!funcionarioForm.valid" (click)="salvarFuncionario()">
+                <input class="btn btn-primary float-right" type="button" value="Salvar" (click)="salvarFuncionario()">
             </div>
             <!-- SALVAR -->
 

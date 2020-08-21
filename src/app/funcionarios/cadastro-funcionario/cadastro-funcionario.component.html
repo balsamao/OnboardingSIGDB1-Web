@@ -15,7 +15,7 @@
 
         <div class="row">
             <!-- NOME -->
-            <div class="col">
+            <div class="col-6">
                 <label for="nome-funcionario">Nome</label>
                 <input class="form-control form-control-sm" [class.is-invalid]="name.errors" [class.is-valid]="!name.errors" type="text" id="nomeFuncionario" formControlName="name"
                     maxlength="150" required>
@@ -26,9 +26,6 @@
                 </div>
             </div>
             <!-- NOME -->
-        </div>
-
-        <div class="row">
 
             <!-- CPF -->
             <div class="col-6">
@@ -45,14 +42,7 @@
                 </div>
             </div>
             <!-- CPF -->
-
-            <!-- DATA CONTRATAÇÃO -->
-            <div class="col-6">
-                <label for="contratacao-funcionario">Data Contratação</label>
-                <input class="form-control form-control-sm" [class.is-invalid]="hiring.invalid" [class.is-valid]="hiring.valid" type="date" id="hiringFuncionario" formControlName="hiring">
-            </div>
-            <!-- DATA CONTRATAÇÃO -->
-
+            
         </div>
 
         <div class="row">
