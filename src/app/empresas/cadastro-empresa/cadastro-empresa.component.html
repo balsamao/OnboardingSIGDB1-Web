@@ -50,14 +50,14 @@
             <!-- DATA FUNDAÇÃO -->
             <div class="col-6">
                 <label for="fundacao-empresa">Data Fundação</label>
-                <input class="form-control form-control-sm" type="date" [class.is-invalid]="fundation.errors" [class.is-valid]="!fundation.errors" id="fundacaoEmpresa" formControlName="fundation">
+                <input class="form-control form-control-sm" type="date" max="{{today()}}" [class.is-invalid]="fundation.errors" [class.is-valid]="!fundation.errors" id="fundacaoEmpresa" formControlName="fundation">
             </div>
             <!-- DATA FUNDAÇÃO -->
 
         </div>
 
         <div class="row">
-            <!-- SALVAR [disabled]="!empresaForm.valid"-->
+            <!-- SALVAR -->
             <div class="col-auto botoes">
                 <input class="btn btn-primary float-right" type="button" value="Salvar" 
                     (click)="salvarEmpresa()">

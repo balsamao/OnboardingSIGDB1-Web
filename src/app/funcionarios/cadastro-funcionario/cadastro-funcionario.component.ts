@@ -45,7 +45,9 @@ export class CadastroFuncionarioComponent implements OnInit {
       this.funcionarioService.listarPorId(this.route.snapshot.params['id'])
         .subscribe(retorno => {
           this.funcionarioForm.patchValue(retorno);
-          this.funcionarioForm.get("hiring").setValue(this.dataService.formatarString(retorno.hiring, "yyyy-MM-DD"));
+          if (retorno.hiring != null && retorno.hiring != "") {
+            this.funcionarioForm.get("hiring").setValue(this.dataService.formatarString(retorno.hiring, "yyyy-MM-DD"));
+          }
         });
     }
 

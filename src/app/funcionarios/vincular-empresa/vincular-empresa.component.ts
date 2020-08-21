@@ -21,16 +21,16 @@ export class VincularEmpresaComponent implements OnInit {
 
   sucesso: boolean = false;
   mensagemErro: string = '';
-  empresas : Empresa[] = [];
+  empresas: Empresa[] = [];
 
   funcionarioForm = this.fb.group({
-    id: [{Value : this.funcionario?.id}],
+    id: [{ Value: this.funcionario?.id }],
     name: [this.funcionario?.name, Validators.required],
-    cpf: [{Value : this.funcionario?.cpf}],
+    cpf: [{ Value: this.funcionario?.cpf }],
     hiring: [this.funcionario?.hiring],
     companyId: [this.funcionario?.companyId],
-    roleId: [{Value: this.funcionario?.roleId}], 
-  }, {validators:contratacaoValidador});
+    roleId: [{ Value: this.funcionario?.roleId }],
+  }, { validators: contratacaoValidador });
 
   constructor(private fb: FormBuilder,
     private funcionarioService: FuncionarioService,
@@ -46,7 +46,7 @@ export class VincularEmpresaComponent implements OnInit {
       this.funcionarioService.listarPorId(this.route.snapshot.params['id'])
         .subscribe(retorno => {
           this.funcionarioForm.patchValue(retorno);
-          if(retorno.hiring != null && retorno.hiring != ""){
+          if (retorno.hiring != null && retorno.hiring != "") {
             this.funcionarioForm.get("hiring").setValue(this.dataService.formatarString(retorno.hiring, "yyyy-MM-DD"));
           }
           this.funcionario = retorno;
@@ -59,8 +59,12 @@ export class VincularEmpresaComponent implements OnInit {
       .subscribe(_ => this.respostaSucesso(), error => this.respostaComErro(error));
   }
 
-  onSelect(id : number) {
+  onSelect(id: number) {
     this.funcionarioForm.get("companyId").patchValue(Number(id));
+  }
+
+  today(): string {
+    return this.dataService.today();
   }
 
   private listarEmpresas() {
@@ -68,13 +72,7 @@ export class VincularEmpresaComponent implements OnInit {
       .subscribe(empresas => this.empresas = empresas, error => this.empresas = []);
   }
 
-  get companyId() { return this.funcionarioForm.get('companyId'); }
-
-  get hiring() { return this.funcionarioForm.get('hiring'); }
-
-  private entidade() { return this.funcionarioForm.getRawValue() as Funcionario; }
-
-    private respostaSucesso() {
+  private respostaSucesso() {
     this.sucesso = true;
     this.mensagemErro = "";
     this.funcionarioForm.reset()
@@ -85,13 +83,19 @@ export class VincularEmpresaComponent implements OnInit {
     this.sucesso = false;
   }
 
+  get companyId() { return this.funcionarioForm.get('companyId'); }
+
+  get hiring() { return this.funcionarioForm.get('hiring'); }
+
+  private entidade() { return this.funcionarioForm.getRawValue() as Funcionario; }
+
 }
 
 export const contratacaoValidador: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const companyId = control.get('companyId');
   const hiring = control.get('hiring');
 
-  if((companyId.value != null && companyId.value != 0) && (hiring.value == "" || hiring.value == "Invalid date")){
+  if ((companyId.value != null && companyId.value != 0) && (hiring.value == "" || hiring.value == "Invalid date")) {
     return { contratacaoValidador: true };
   }
 

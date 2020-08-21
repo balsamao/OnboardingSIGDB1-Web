@@ -38,7 +38,7 @@
             <!-- DATA CONTRATAÇÃO -->
             <div class="col-6 margem">
                 <label for="contratacao-funcionario">Data Contratação</label>
-                <input class="form-control form-control-sm" [class.is-invalid]="funcionarioForm.errors?.contratacaoValidador" [class.is-valid]="hiring.valid" type="date" id="hiringFuncionario" formControlName="hiring">
+                <input class="form-control form-control-sm" max="{{today()}}" [class.is-invalid]="funcionarioForm.errors?.contratacaoValidador" [class.is-valid]="hiring.valid" type="date" id="hiringFuncionario" formControlName="hiring">
                 <div *ngIf="funcionarioForm.errors?.contratacaoValidador" class="invalid-feedback">
                     <div *ngIf="funcionarioForm.errors?.contratacaoValidador">
                         Data de contratação é obrigatória.

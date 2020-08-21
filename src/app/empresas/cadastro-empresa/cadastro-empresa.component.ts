@@ -61,6 +61,10 @@ export class CadastroEmpresaComponent implements OnInit {
     }
   }
 
+  today(): string {
+    return this.dataService.today();
+  }
+  
   get name() { return this.empresaForm.get('name'); }
 
   get cnpj() { return this.empresaForm.get('cnpj'); }
