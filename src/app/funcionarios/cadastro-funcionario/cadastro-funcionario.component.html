@@ -15,7 +15,7 @@
 
         <div class="row">
             <!-- NOME -->
-            <div class="col-6">
+            <div class="col-sm-4 col-md-6">
                 <label for="nome-funcionario">Nome</label>
                 <input class="form-control form-control-sm" [class.is-invalid]="name.errors" [class.is-valid]="!name.errors" type="text" id="nomeFuncionario" formControlName="name"
                     maxlength="150" required>
@@ -28,7 +28,7 @@
             <!-- NOME -->
 
             <!-- CPF -->
-            <div class="col-6">
+            <div class="col-sm-4 col-md-6">
                 <label for="cpf-funcionario">CPF</label>
                 <input class="form-control form-control-sm" [class.is-invalid]="cpf.invalid" [class.is-valid]="cpf.valid" type="text" id="cpfFuncionario" formControlName="cpf"
                     mask="000.000.000-00" pattern="{{regexCPF}}" required cpfValidadorDirective>
