@@ -4,16 +4,16 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col">Data Contratação</th>
+                <th class="d-none d-md-block" scope="col">CPF</th>
+                <th class="d-none d-md-block" scope="col">Data Contratação</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let funcionario of funcionarios">
                 <th scope="row">{{funcionario?.id}}</th>
                 <td>{{funcionario?.name}}</td>
-                <td>{{funcionario?.cpf | mask: '000.000.000-00'}}</td>
-                <td>{{funcionario?.hiring}}</td>
+                <td class="d-none d-md-block" >{{funcionario?.cpf | mask: '000.000.000-00'}}</td>
+                <td class="d-none d-md-block" >{{funcionario?.hiring}}</td>
                 <td>
                     <div class="dropdown" style="float: right;">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"

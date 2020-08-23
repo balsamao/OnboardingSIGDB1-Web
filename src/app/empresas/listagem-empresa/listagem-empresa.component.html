@@ -4,16 +4,16 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">CNPJ</th>
-                <th scope="col">Data Fundação</th>
+                <th class="d-none d-md-block" scope="col">CNPJ</th>
+                <th class="d-none d-md-block" scope="col">Data Fundação</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let empresa of empresas">
                 <th scope="row">{{empresa?.id}}</th>
                 <td>{{empresa?.name}}</td>
-                <td>{{empresa?.cnpj | mask: '00.000.000/0000-00'}}</td>
-                <td>{{empresa?.fundation}}</td>
+                <td class="d-none d-md-block">{{empresa?.cnpj | mask: '00.000.000/0000-00'}}</td>
+                <td class="d-none d-md-block">{{empresa?.fundation}}</td>
                 <td>
                     <div class="dropdown" style="float: right;">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
